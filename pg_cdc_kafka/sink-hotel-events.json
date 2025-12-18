@@ -1,0 +1,30 @@
+{
+  "name": "pg-sink-hotel-booking-events",
+  "config": {
+    "connector.class": "io.debezium.connector.jdbc.JdbcSinkConnector",
+
+    "connection.url": "jdbc:postgresql://postgres_target:5432/targetdb",
+    "connection.username": "target_user",
+    "connection.password": "target_pass",
+
+    "topics": "pgdemo.public.hotel_booking_events",
+
+    "insert.mode": "upsert",
+    "primary.key.mode": "record_value",
+    "primary.key.fields": "id",
+
+    "auto.create": "true",
+    "auto.evolve": "true",
+
+    "transforms": "unwrap",
+    "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+    "transforms.unwrap.drop.tombstones": "true",
+    "transforms.unwrap.delete.handling.mode": "drop",
+
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false",
+
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "key.converter.schemas.enable": "false"
+  }
+}

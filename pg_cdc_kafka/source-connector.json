@@ -1,0 +1,33 @@
+{
+  "name": "pg-source-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+
+    "database.hostname": "postgres_source",
+    "database.port": "5432",
+    "database.user": "source_user",
+    "database.password": "source_pass",
+    "database.dbname": "sourcedb",
+
+    "topic.prefix": "pgserver1",
+
+    "plugin.name": "pgoutput",
+
+    "slot.name": "debezium_slot",
+    "publication.autocreate.mode": "filtered",
+
+    "table.include.list": "public.reservations",
+
+    "snapshot.mode": "initial",
+
+    "decimal.handling.mode": "string",
+    "time.precision.mode": "connect",
+
+    "tombstones.on.delete": "false",
+
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "key.converter.schemas.enable": "false",
+    "value.converter.schemas.enable": "false"
+  }
+}

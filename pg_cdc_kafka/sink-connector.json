@@ -1,0 +1,22 @@
+{
+  "name": "pg-sink-reservations",
+  "config": {
+    "connector.class": "io.debezium.connector.jdbc.JdbcSinkConnector",
+
+    "topics": "pgserver1.public.reservations",
+
+    "connection.url": "jdbc:postgresql://postgres_target:5432/targetdb",
+    "connection.username": "target_user",
+    "connection.password": "target_pass",
+
+    "insert.mode": "insert",
+
+    "auto.create": "false",
+    "auto.evolve": "false",
+
+    "table.name.format": "reservations",
+
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false"
+  }
+}

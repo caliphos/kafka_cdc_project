@@ -1,0 +1,35 @@
+{
+  "name": "pg-source-hotel-events",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+
+    "database.hostname": "postgres_source",
+    "database.port": "5432",
+    "database.user": "source_user",
+    "database.password": "source_pass",
+    "database.dbname": "sourcedb",
+
+    "topic.prefix": "pgdemo",
+
+    "plugin.name": "pgoutput",
+    "slot.name": "hotel_events_slot",
+
+    "publication.autocreate.mode": "filtered",
+    "table.include.list": "public.hotel_booking_events",
+
+    "snapshot.mode": "initial",
+    "decimal.handling.mode": "string",
+
+    "transforms": "unwrap",
+    "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+    "transforms.unwrap.drop.tombstones": "true",
+
+    "tombstones.on.delete": "false",
+
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "key.converter.schemas.enable": "true",
+    "value.converter.schemas.enable": "true",
+    "decimal.handling.mode": "string"
+  }
+}
